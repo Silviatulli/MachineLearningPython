@@ -26,7 +26,7 @@ b0=model.intercept_
 b1=model.coef_
 print("b0",b0)
 print("b1",b1)
-mpg=b0+b1*wt#   mpg=37.28+-5.34*(wt)
+#mpg=b0+b1*wt#   mpg=37.28+-5.34*(wt)
 pred=model.predict(x)
 
 
