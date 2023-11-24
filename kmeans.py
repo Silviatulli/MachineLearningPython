@@ -1,9 +1,12 @@
 
 # read university data
 import pandas as pd
+
+# Data Gathering
 university=pd.read_csv('Universities.csv')
 university.head()
 
+# Data Processing
 # ignore the string column 
 x=university.iloc[:,1:]
 x.head()
@@ -14,7 +17,7 @@ norm=MinMaxScaler()
 for i in x.columns:
     x[i]=norm.fit_transform(x[i].values.reshape(-1, 1))
 
-## K means clustering
+# Model Creation K means clustering
 from sklearn.cluster import KMeans
 #Plot Elbow curve to get k value 
 #total within sum of squared
@@ -23,6 +26,7 @@ for i in range(2,10):
     model=KMeans(n_clusters=i).fit(x)
     twss.append(model.inertia_)
 
+# Model Visualization
 import matplotlib.pyplot as plt
 plt.plot(range(2,10),twss,'-bo')
 plt.xlabel('Value of K')
