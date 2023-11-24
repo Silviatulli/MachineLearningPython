@@ -1,13 +1,15 @@
-# Reading the dataset
+# Data Gathering
 from pydataset import data
 iris=data('iris')
 iris.head()
 
+# Data Processing
 iris.isna().sum()
 # splitting the dataset into train and test
 x=iris.drop('Species',axis=1)
 y=iris['Species']
 
+# Train and Test Split
 from sklearn.model_selection import train_test_split
 trainx,testx,trainy,testy=train_test_split(x,y,test_size=0.2)
 
@@ -25,7 +27,7 @@ model.fit(trainx,trainy)
 train_pred=model.predict(trainx)
 test_pred=model.predict(testx)
 
-# calculate accuracy
+# Model Evaluation
 from sklearn.metrics import accuracy_score
 train_acc=accuracy_score(train_pred,trainy)
 test_acc=accuracy_score(test_pred,testy)
@@ -37,7 +39,7 @@ from sklearn.tree import DecisionTreeClassifier
 model_new=DecisionTreeClassifier(criterion='entropy')
 model_new.fit(trainx,trainy)
 
-# predict using model
+# Model Evaluation
 train_pred=model_new.predict(trainx)
 test_pred=model_new.predict(testx)
 train_acc=accuracy_score(train_pred,trainy)
@@ -45,7 +47,7 @@ test_acc=accuracy_score(test_pred,testy)
 print("Training acc",train_acc)
 print("Testing acc",test_acc)
 
-## Plot
+# Model Visalization
 import matplotlib.pyplot as plt
 fig=plt.figure(figsize=(20, 10))
 from sklearn import tree
