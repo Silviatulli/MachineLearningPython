@@ -1,10 +1,11 @@
-#matplotlib auto
-#Read the data
+# Data Gathering
 from pydataset import data
 cars=data('mtcars')
-#data preprocessing
+
+# Data Processing
 cars=cars[['wt','mpg']]
-#check missing values
+
+# Handling Missing Values
 cars.isna().sum()
 
 x=pedictors=cars['wt'].values.reshape(-1, 1)
@@ -15,9 +16,9 @@ plt.scatter(x,y)
 plt.xlabel('WT')
 plt.ylabel('MPG')
 
-#Model creation
-#Simple linear regression model
-#ols- ordinary least squared
+# Model creation
+# Simple linear regression model
+# ols- ordinary least squared
 from sklearn.linear_model import LinearRegression
 model=LinearRegression()
 model.fit(x,y)
@@ -33,7 +34,7 @@ pred=model.predict(x)
 plt.scatter(x,y)
 plt.plot(x,pred,c='r')
 
-#predicting mpg when wt is 5
+# predicting mpg when wt is 5
 model.predict([[5]])
 # from numpy import sqrt
 # sqrt(9)
@@ -41,8 +42,8 @@ model.predict([[5]])
 # np.sqrt(9)
 
 
-##### Evaluation
-#RMSE
+# Model Evaluation
+# RMSE
 from numpy import sqrt,mean
 error=pred-y
 mse=mean(error*error)
@@ -58,21 +59,22 @@ mean_squared_error(pred,y)
 r2_score(pred,y)# 67%
 
 
-##### Splitting data
+# Train and Test Split
 from sklearn.model_selection import train_test_split
 train,test=train_test_split(cars,test_size=.2)
 trainx=train['wt'].values.reshape(-1,1)
 trainy=train['mpg']
 testx=test['wt'].values.reshape(-1,1)
 testy=test['mpg']
-## model creation
+# Model Creation
 model_train=LinearRegression()
 model_train.fit(trainx,trainy)
 
-## Calculating training acc
+# Model Evaluation
+# Training Accuracy
 train_pred=model_train.predict(trainx)
 sqrt(mean_squared_error(train_pred,trainy)) #2.74
-## Calculating testing acc
+# Testing Accuracy
 test_pred=model_train.predict(testx)
 sqrt(mean_squared_error(test_pred,testy))  #3.75
 
